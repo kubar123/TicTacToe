@@ -16,9 +16,8 @@ import javax.swing.SwingConstants;
  * @author Jakub Rybicki <lansoftprogramming.com>
  */
 public class TicTacToe extends JFrame{
-    
     JPanel p=new JPanel();
-    XOButton buttons[]=new XOButton[9];
+    XOButton buttons[]=new XOButton[9];//adding buttons array with 9 buttons
     
     /**
      * @param args the command line arguments
@@ -26,21 +25,24 @@ public class TicTacToe extends JFrame{
     public static void main(String[] args) {
         new TicTacToe();
     }
+    
     public TicTacToe(){
         super("TicTacToe");
+        
         setSize(400,600);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        p.setLayout(new GridLayout(4,3));
-        for(int i=0;i<9;i++){
-            buttons[i]=new XOButton();
-            p.add(buttons[i]);
+        
+        p.setLayout(new GridLayout(4,3));   //4x3 grid as layout
+        for(int i=0;i<9;i++){           //add new XOButton object for 9
+            buttons[i]=new XOButton();  //of the arrays.
+            p.add(buttons[i]);  //add buttons to p
         }
-        JLabel hello=new JLabel("o Starts!",JLabel.LEFT);
+        JLabel hello=new JLabel("o always starts!",JLabel.LEFT);//new jLabel
         hello.setAlignmentX(BOTTOM_ALIGNMENT);
         hello.setAlignmentY(LEFT_ALIGNMENT);
-        hello.setVisible(true);
         p.add(hello);
+        
         add(p);
         setVisible(true);
         
