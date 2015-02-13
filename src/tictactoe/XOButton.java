@@ -17,6 +17,7 @@ class XOButton extends JButton implements ActionListener{
     ImageIcon X,O;
     byte value=0;
     static boolean oTurn;
+    boolean usedSpace;
     //0:nothing  1:X     2:O
     
     
@@ -24,15 +25,21 @@ class XOButton extends JButton implements ActionListener{
         X=new ImageIcon(this.getClass().getResource("x.png"));
         O=new ImageIcon(this.getClass().getResource("o.png"));
         oTurn=true;
+        usedSpace=false;
         this.addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent e){
         oTurn=!oTurn;//toggle players turn
-        if(oTurn){
-            setIcon(O);
+        if(!usedSpace){
+            usedSpace=true;
+            if(oTurn){
+                setIcon(O);
+            }else{
+                setIcon(X);
+            }
         }else{
-            setIcon(X);
+            System.out.println("Error, used space!");
         }
 //        value++;
 //        value%=3;
