@@ -16,28 +16,36 @@ import java.awt.event.ActionListener;
 class XOButton extends JButton implements ActionListener{
     ImageIcon X,O;
     byte value=0;
+    static boolean oTurn;
     //0:nothing  1:X     2:O
     
     
     public XOButton(){
         X=new ImageIcon(this.getClass().getResource("x.png"));
         O=new ImageIcon(this.getClass().getResource("o.png"));
+        oTurn=true;
         this.addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent e){
-        value++;
-        value%=3;
-        switch(value){
-            case 0:
-                setIcon(null);
-                break;
-            case 1:
-                setIcon(X);
-                break;
-            case 2:
-                 setIcon(O);
-                 break;
+        oTurn=!oTurn;//toggle players turn
+        if(oTurn){
+            setIcon(O);
+        }else{
+            setIcon(X);
         }
+//        value++;
+//        value%=3;
+//        switch(value){
+//            case 0:
+//                setIcon(null);
+//                break;
+//            case 1:
+//                setIcon(X);
+//                break;
+//            case 2:
+//                 setIcon(O);
+//                 break;
+//        }
     }
 }
