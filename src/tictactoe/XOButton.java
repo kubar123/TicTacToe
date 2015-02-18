@@ -9,15 +9,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+//import jdk.internal.org.objectweb.asm.util.ASMifier;
 /**
  *
  * @author Jakub Rybicki <lansoftprogramming.com>
  */
-class XOButton extends JButton implements ActionListener{
+public class XOButton extends JButton implements ActionListener{
     ImageIcon X,O;
     //byte value=0;
     static boolean oTurn;   //o player's turn
     boolean usedSpace;      //is button in use
+    byte whatSpace;
+    byte myId;
     //0:nothing  1:X     2:O
     
     
@@ -27,22 +31,29 @@ class XOButton extends JButton implements ActionListener{
         O=new ImageIcon(this.getClass().getResource("o.png"));
         oTurn=true; // new game: o starts
         usedSpace=false; //the current space is not is use
+        whatSpace=0;
         
         this.addActionListener(this);//listens for click of this obj
     }
     
+                            //On click...
     public void actionPerformed(ActionEvent e){
-        oTurn=!oTurn;       //toggle players turn
         if(!usedSpace){     //check if space is 'in use'
             usedSpace=true; //set space to in use
             if(oTurn){      //check users turn
+                whatSpace=2;
                 setIcon(O);
             }else{
+                whatSpace=1;
                 setIcon(X);
             }
         }else{
-            System.out.println("Error, used space!");
+            System.out.println("Error, space used!");
         }
+            System.out.println(whatSpace);
+            System.out.println("ID: "+myId);
+           // SYstem.out.println(     )
+
 //  ----------below for 'free mode' ----------------
 //  code saved for later feature - please ignore
 // -- Byte valye=0;         0:nothing   1:x 2:o
@@ -60,6 +71,12 @@ class XOButton extends JButton implements ActionListener{
 //                 setIcon(O);
 //                 break;
 //        }
-// -------------------------End of 'free mode'--------
+// ---------------End of 'free mode'--------
+        
+       //System.out.println(Arrays.toString(TicTacToe.getMoves()));
+        oTurn=!oTurn;       //toggle players turn
+        //check if game is won
+        System.out.println("________:"+GameEngine.winGameCheck(TicTacToe.buttons, myId, whatSpace));
+        
     }
 }
